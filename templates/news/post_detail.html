@@ -1,0 +1,32 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+ 
+{% block title %} Post {% endblock title %}
+ 
+{% block content %}
+<table border="1" cellpadding="10">
+    <tr>
+
+         <td>
+             <h4>{{ post.author|title }}, {{ post.time_in|date:'d M Y' }}</h4>
+        </td>
+        <td>
+            <h4>{{ post.title|title }}</h4>
+        </td>
+    </tr><tr>
+
+         <td>
+            {% for category in post.categorys.all %}
+                {{ category }}
+                <a href="{% url 'subscribe' category.id %}">Подписаться</a> <br/>
+            {% endfor %}
+        </td>
+        <td>
+            {{ post.text }}
+        </td>
+    </tr>
+</table>
+<a href="/news/">Вернуться к общему списку</a>
+{% endblock content %}
+
+
